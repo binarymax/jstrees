@@ -1,31 +1,26 @@
-<h1>Repo for Javascript Tree-themed algorithms</h1>
+Repo for Javascript Tree-themed algorithms
+==========================================
 
-<hr />
+Tree Generator Example
+----------------------
 
-<h2>Example</h2>
-<h3>Tree Generator</h3>
-<p>
-	Tree generator uses the tree API and accompanying settings.js to let the user generate simple trees on an html canvas. <br />
-	A live example is here: <a href="http://www.binarymax.com/tree.html">http://www.binarymax.com/tree.html</a>
-</p>
+>	Tree generator uses the tree API and accompanying settings.js to let the user generate simple trees on an html canvas.
+>
+>	A live example is here: http://www.binarymax.com/tree.html
 
-<hr />
+tree.js API
+-----------
 
-<h2>tree.js API</h2>
-<h3>makeNode : Creates a root node.</h3>
-<p>
-	All nodes (including root) have the following prototype functions:	
-	<ul>
-		<li>addChild(obj) : Converts an object into a node, and appends it as a child.</li>  
-		<li>traverse(callback) : Traverses the tree, leaf nodes first down to root, and executes a callback for each</li>
-		<li>traverse2(callback) : Traverses the tree, root first up to leaf nodes, and executes a callback for each</li>
-	</ul>
-<p>
+### makeNode : Creates a root node.
 
-<h3>arrayToTree : Converts a flat array to a tree data structure</h3>
-<p>
-Sample input:
-<pre>
+>	All nodes (including root) have the following prototype functions:	
+>		addChild(obj) : Converts an object into a node, and appends it as a child.
+>		traverse(callback) : Traverses the tree, leaf nodes first down to root, and executes a callback for each.
+>		traverse2(callback) : Traverses the tree, root first up to leaf nodes, and executes a callback for each.
+
+### arrayToTree : Converts a flat array to a tree data structure
+
+>  Sample input:
 	var ary = [
 		{"Level":1,"Name":"a"},
 		{"Level":2,"Name":"b"},
@@ -53,10 +48,8 @@ Sample input:
 		str+=obj.Name;
 	});
 	console.log(str);
-</pre>
-<br />
-Sample output:
-<pre>
+
+>  Sample output:
     |a
     |    |b
     |    |c
@@ -71,5 +64,3 @@ Sample output:
     |    |    |l
     |m
     |    |n
-</pre>
-</p>

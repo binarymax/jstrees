@@ -1,0 +1,107 @@
+/*
+	MIT License
+	Copyright (c) 2012, Max Irwin
+*/
+
+* { margin:0; }
+
+body { overflow: hidden; font-family:sans-serif; color:#333; }
+
+.display {
+	z-index:0;
+}
+
+.about {
+	display:none;
+	position:fixed;
+	top:10px;
+	right:10px;
+	width:250px;
+	margin:0px;
+	padding:0px;
+	text-align:right;
+}
+
+.about p {
+	margin-top:20px;
+	color:#999;
+}
+
+.settings {
+	z-index:1;
+	position:fixed;
+	right:10px;
+	bottom:10px;
+	text-align: right;
+	width:250px;
+}
+
+.navigation {
+	z-index:1;
+	position:fixed;
+	left:10px;
+	bottom:10px;
+	font-family:sans-serif;
+	text-align: left;
+	width:250px;	
+}
+
+.list {
+	list-style-type: none;
+	padding:0px;
+}
+
+.setting {
+	text-align: right;
+	margin-bottom:5px;
+	margin-top:5px;
+	padding:5px;
+	border-bottom:1px solid #999;
+}
+
+.navitem {
+	text-align: left;
+	margin-bottom:5px;
+	margin-top:5px;
+	padding:5px;
+	border-bottom:1px solid #999;
+}
+
+.navlink {
+	color:#999;
+	text-decoration:none;
+}
+
+.navlink:hover {
+	color:#333;
+	font-weight:bold;
+}
+
+.setting input {
+	margin-top:5px;
+}
+
+.gauge {
+	display:inline;
+	width:165px;
+	height:20px;
+	padding:0px;
+}
+
+.gaugeline {
+	display:inline;
+	width:12px;
+	height:20px;
+	background-color:#DDD;
+	margin-left:1px;
+	margin-right:1px;
+	cursor:pointer;
+}
+
+.gaugeline.on {
+	background-color:#999;
+}
+
+.gaugeline:hover {
+	background-color:#333;
+}

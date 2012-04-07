@@ -1,3 +1,11 @@
+/*
+	MIT License
+	Copyright (c) 2012, Max Irwin
+*/
+
+//
+// Generic tree data structure, with children and traversal methods
+//
 var Tree = (function() {
 	"use strict"; 
 
@@ -10,6 +18,7 @@ var Tree = (function() {
 		Node.prototype = obj||Object;
 		Node.prototype.addChild = addChild;
 		Node.prototype.traverse = traverse;
+		Node.prototype.traverse2 = traverse2;
 		var self = new Node();
 		self.depth = depth||0;
 		self.children = [];
@@ -24,11 +33,19 @@ var Tree = (function() {
 			return childNode;	
 	};		
 		
-	//Node prototype, traverses down the tree, executing a callback for each node.
-	var traverse = function(callback) {
-		callback(this);
+	//Node prototype, traverses the tree, executing a callback for each node. (Leaves to root)
+	var traverse = function(callback,parent) {
 		for(var i=0,l=this.children.length;i<l;i++) {
-			this.children[i].traverse(callback);
+			this.children[i].traverse(callback,this);
+		}
+		callback(this,parent);
+	};
+
+	//Node prototype, traverses the tree, executing a callback for each node.  (Root to leaves)
+	var traverse2 = function(callback,parent) {
+		callback(this,parent);
+		for(var i=0,l=this.children.length;i<l;i++) {
+			this.children[i].traverse(callback,this);
 		}
 	};
 	
@@ -90,8 +107,9 @@ var Tree = (function() {
 		return root;
 		
 	};	
-	
+		
 	return {
+		makeNode:treeNode,
 		arrayToTree:arrayToTree
 	}	
 	

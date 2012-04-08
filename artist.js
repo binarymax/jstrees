@@ -10,23 +10,24 @@
 var artist = window.artist = (function(){ 
 
 	var E = function(e){return document.getElementById(e);};
-	var _w,_h,_generations,_size,_angle,_ratio,_trunk,_twigs,_leaves,_canvas,_c; 
+	var _w,_h,_generations,_size,_angle,_ratio,_trunk,_twigs,_leaves,_fertility,_canvas,_c; 
 	
 	//(Re)initializes environment, gets values from UI
 	var settings = function(){
 		_canvas = E("c");
 		_canvas.width = _canvas.clientWidth = _w = window.innerWidth;
 		_canvas.height = _canvas.clientHeight = _h = window.innerHeight;		
-		_generations = parseInt(E("generations").value); //Iterations through growth 
-		_size = parseFloat(E("size").value);	//Initial length of the trunk 
-		_angle = parseFloat(E("angle").value); //Angle seed for branch direction
-		_ratio = parseFloat(E("ratio").value); //Ratio seed for length evolution
-		_trunk = parseFloat(E("trunk").value); //Initial Thickness of the trunk 
-		_twigs = parseFloat(E("twigs").value);   //Not used yet
-		_leaves = parseFloat(E("leaves").value); //Initial Size of the leaves
-
-		_c = _canvas.getContext("2d"); //Context for use in all rendering
+		_generations = parseInt(E("generations").value); 	//Iterations through growth 
+		_size = parseFloat(E("size").value);					//Initial length of the trunk 
+		_angle = parseFloat(E("angle").value); 				//Angle seed for branch direction
+		_ratio = parseFloat(E("ratio").value); 				//Ratio seed for length evolution
+		_trunk = parseFloat(E("trunk").value); 				//Initial Thickness of the trunk 
+		_twigs = parseInt(E("twigs").value);   				//Not used yet
+		_leaves = parseFloat(E("leaves").value); 				//Initial Size of the leaves
+		_c = _canvas.getContext("2d"); 							//Context for use in all rendering
 		_c.clearRect(0,0,_w,_h);
+		_c.fillStyle = "#FFFFFF";
+		_c.fillRect(0,0,_w,_h);
 	};
 		
 	//Converts cartesian coordinates to polar
@@ -105,7 +106,7 @@ var artist = window.artist = (function(){
 			//evolve from parent:
 			lp = branch.l*ratio;
 			wp = branch.w*_ratio;
-			rp = branch.r*(2-_ratio);
+			rp = branch.r*_leaves;
 			bp = branch.Branch+1;
 			d1 = branch.d-angle;
 			d2 = branch.d+angle;
@@ -115,7 +116,7 @@ var artist = window.artist = (function(){
 			cp = cartesian(branch.d,lp,branch.x,branch.y);
 
 			drawBranch(branch.x,branch.y,cp.x,cp.y,wp);
-			if(branch.depth>=_twigs)drawLeaf(cp.x+parseInt(range(1,5)),cp.y+parseInt(range(1,5)),rp);
+			if(branch.depth>=(15-_twigs))drawLeaf(cp.x+parseInt(range(1,5)),cp.y+parseInt(range(1,5)),rp);
 
 			branch.addChild({x:cp.x,y:cp.y,d:d1,l:lp,w:wp,r:rp});
 			branch.addChild({x:cp.x,y:cp.y,d:d2,l:lp,w:wp,r:rp});

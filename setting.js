@@ -25,6 +25,7 @@ var Setting = function(input){
 	this.max = max;
 	this.val = val;
 	var self = this;
+	console.log('--',min);
 	for(var i=0,v=min;i<=Setting.lineCount;i++) {
 		var line = Setting.element(gauge,"div","gaugeline",{'data-value':v});
 		line.innerHTML = "&nbsp;&nbsp;";
@@ -35,7 +36,8 @@ var Setting = function(input){
 			artist.draw();
 		}
 		this.lines.push({val:v,element:line});
-		v = flt?Math.round((inc*(i+1))*100)/100:inc*(i+1);
+		v = (flt?Math.round((inc*(i+1))*100)/100:inc*(i+1)) + min;
+		console.log(v);
 	}
 	this.change(val);
 }

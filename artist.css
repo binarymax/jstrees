@@ -16,7 +16,7 @@ body { overflow: hidden; font-family:sans-serif; color:#333; }
 	position:fixed;
 	top:10px;
 	right:10px;
-	width:250px;
+	width:280px;
 	margin:0px;
 	padding:0px;
 	text-align:right;
@@ -33,7 +33,7 @@ body { overflow: hidden; font-family:sans-serif; color:#333; }
 	right:10px;
 	bottom:10px;
 	text-align: right;
-	width:250px;
+	width:280px;
 }
 
 .navigation {
@@ -43,7 +43,7 @@ body { overflow: hidden; font-family:sans-serif; color:#333; }
 	bottom:10px;
 	font-family:sans-serif;
 	text-align: left;
-	width:250px;	
+	width:280px;	
 }
 
 .list {
@@ -86,6 +86,7 @@ body { overflow: hidden; font-family:sans-serif; color:#333; }
 	width:165px;
 	height:20px;
 	padding:0px;
+	white-space: nowrap;
 }
 
 .gaugeline {
@@ -96,6 +97,7 @@ body { overflow: hidden; font-family:sans-serif; color:#333; }
 	margin-left:1px;
 	margin-right:1px;
 	cursor:pointer;
+	font-size:14px;
 }
 
 .gaugeline.on {

@@ -102,7 +102,7 @@ var artist = window.artist = (function(){
 		
 		if(!_worker) {
 			//Initialize worker
-			_worker = new Worker("artistworker.js");
+			_worker = new Worker("/javascripts/artistworker.js");
 			_worker.addEventListener('message',workerEvent);
 		}		
  

@@ -1,0 +1,63 @@
+<!doctype html>
+<!-- MIT License -->
+<!-- Copyright (c) 2012, Max Irwin -->
+<html>
+<head>
+	<title>binarymax.com | Tree Generator</title>
+	<meta name="author" content="Max Irwin"></meta>	
+	<link rel="stylesheet" type="text/css" href="artist.css"></link>
+</head>
+<body onload="artist.init();">
+
+	<canvas id="c" style="border:1px solid #CCC;" class="display"></canvas>
+
+	<section class="about" id="about">
+		<h1>Version 0.5</h1>
+		<p>Each tree you make is unique, and uses a simple algorithm to grow from a digital seed into a beautiful piece of forestry</p>
+		<p>You can change the starting parameters of the tree by altering the settings below. Click on any of the gauges to grow a new tree</p>
+		<p>Click 'Save' download the image.  Click 'Draw' for another tree with the same settings</p>
+		<p>Made by Max Irwin, 2012</p>		
+		<p>Code available on Github: <a href="https://github.com/binarymax/jstrees">https://github.com/binarymax/jstrees</a>
+	</section>
+
+	<section class="settings">
+		<form onsubmit="return artist.draw();">
+			<ul class="list" id="settings">
+				<li class="setting"><label>Branches  <input type="hidden" value="14"   data-min="0"    data-max="16"   name="generations" id="generations" /></label></li>
+				<li class="setting"><label>Thickness <input type="hidden" value="22"   data-min="1" 	data-max="64"   name="trunk" id="trunk" /></label></li>
+				<li class="setting"><label>Length    <input type="hidden" value="110"  data-min="1"    data-max="121"  name="size" id="size" /></label></li>
+				<li class="setting"><label>Angle     <input type="hidden" value="18"   data-min="0"    data-max="36"   name="angle" id="angle" /></label></li>
+				<li class="setting"><label>Growth    <input type="hidden" value="0.86" data-min="0.0"  data-max="1.0"  name="ratio" id="ratio" /></label></li>
+				<li class="setting"><label>Twigs     <input type="hidden" value="6"    data-min="0"    data-max="16"   name="twigs" id="twigs" /></label></li>
+				<li class="setting"><label>Leaves    <input type="hidden" value="1.1"  data-min="0.9"  data-max="1.3"  name="leaves" id="leaves" /></label></li>
+			</ul>
+			<input type="button" value="Save PNG" onclick="artist.savePNG();" /> 
+			<input type="button" value="Save SVG" onclick="artist.saveSVG();" /> 
+			<input type="submit" value="Draw" />
+			<div id="svgoverlay"><div id="svgdialog"><div id="svgimage"></div>Right click the tree above<br>Save-Image-As to download</div></div>
+
+		</form>
+	</section>
+
+	<nav class="navigation">
+		<ul class="list">
+			<li class="navitem"><a href="./index.html" class="navlink">binarymax.com</a></li>
+			<li class="navitem"><a href="./tRand.html" class="navlink">tRand</a></li>
+			<li class="navitem"><a href="./dilated_age_of_information.html" class="navlink">Dilated Age of Information</a></li>
+			<li class="navitem"><a href="./cube.html" class="navlink">jsCube</a></li>
+			<li class="navitem"><a href="./reality_remix.html" class="navlink">Reality Remix</a></li>
+			<li class="navitem"><a href="./square_chase.html" class="navlink">Square Chase</a></li>
+			<li class="navitem"><a href="./raytrace.html" class="navlink">raytrace</a></li>
+			<li class="navitem"><h1>Tree Generator</h1></li>
+		</ul>
+		<input type="button" value="About" onclick="artist.about();" />
+	</nav>
+
+	<script type="text/javascript" src="/tree.js"></script>
+	<script type="text/javascript" src="/setting.js"></script>
+	<script type="text/javascript" src="/artist2.js"></script>
+
+	<script language="javascript" type="text/javascript">(function(){ if(location.hostname==='localhost') return; var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-22107593-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();})();</script>
+
+</body>
+</html>

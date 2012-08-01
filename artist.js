@@ -10,7 +10,7 @@
 var artist = window.artist = (function(){ 
 
 	var E = function(e){return document.getElementById(e);};
-	var _w,_h,_generations,_size,_angle,_ratio,_trunk,_twigs,_leaves,_fertility,_canvas,_c; 
+	var _w,_h,_generations,_size,_angle,_ratio,_trunk,_twigs,_leaves,_canvas,_c; 
 	
 	//(Re)initializes environment, gets values from UI
 	var settings = function(){
@@ -22,12 +22,10 @@ var artist = window.artist = (function(){
 		_angle = parseFloat(E("angle").value); 				//Angle seed for branch direction
 		_ratio = parseFloat(E("ratio").value); 				//Ratio seed for length evolution
 		_trunk = parseFloat(E("trunk").value); 				//Initial Thickness of the trunk 
-		_twigs = parseInt(E("twigs").value);   				//Not used yet
+		_twigs = parseInt(E("twigs").value);   				//Starting branch depth that has leaves
 		_leaves = parseFloat(E("leaves").value); 				//Initial Size of the leaves
 		_c = _canvas.getContext("2d"); 							//Context for use in all rendering
 		_c.clearRect(0,0,_w,_h);
-		_c.fillStyle = "#FFFFFF";
-		_c.fillRect(0,0,_w,_h);
 	};
 		
 	//Converts cartesian coordinates to polar
@@ -66,18 +64,28 @@ var artist = window.artist = (function(){
 
 	
 	//Gets a variation on a base rgb color
-	var colorRange = function(r,g,b) {
-		var z = 20;
-		r = parseInt(range(r-z,r+z));
-		g = parseInt(range(g-z,g+z));
-		b = parseInt(range(b-z,b+z));
+	var colorRange = function(r,g,b,z) {
+		z = z||20;
+		r = parseInt(Math.abs(range(r-z,r+z)));
+		g = parseInt(Math.abs(range(g-z,g+z)));
+		b = parseInt(Math.abs(range(b-z,b+z)));
 		return "#" + r.toString(16) + g.toString(16) + b.toString(16);
-	}
+	};
+
+	//Gets a variation on a base rgb color
+	var greyRange = function(g,z) {
+		z = z||20;
+		g = parseInt(Math.abs(range(g-z,g+z))).toString(16);
+		g = (g.length>1?'':'0') + g;
+		g = "#" + g + g + g;
+		return g;
+	};
 
 	//Draw branch with thickness w
-	var drawBranch = function(x1,y1,x2,y2,w){
+	var drawBranch = function(x1,y1,x2,y2,w,c){
 		_c.beginPath();
-		_c.strokeStyle = "#111111";
+		//_c.strokeStyle = "#111111";
+		_c.strokeStyle = c;
 		_c.moveTo(x1,y1);
 		_c.lineTo(x2,y2);
 		_c.lineWidth = w;
@@ -100,7 +108,7 @@ var artist = window.artist = (function(){
 	//Grow the tree by one branch
 	var grow = function(branch) {
 		if(!branch.grown) {
-			var d1,d2,lp,wp,rp,bp,cp;
+			var d1,d2,lp,wp,rp,bp,cp,cc;
 			var angle = (Math.random()*_angle) + (_angle/2);
 			var ratio = _ratio + Math.random()/8;
 			//evolve from parent:
@@ -115,7 +123,11 @@ var artist = window.artist = (function(){
 						
 			cp = cartesian(branch.d,lp,branch.x,branch.y);
 
-			drawBranch(branch.x,branch.y,cp.x,cp.y,wp);
+			//branch.c = branch.c || greyRange(40,20);
+			//cc = colorRange(51,33,16,10);
+			cc = "#191919"
+
+			drawBranch(branch.x,branch.y,cp.x,cp.y,wp,cc);
 			if(branch.depth>=(15-_twigs))drawLeaf(cp.x+parseInt(range(1,5)),cp.y+parseInt(range(1,5)),rp);
 
 			branch.addChild({x:cp.x,y:cp.y,d:d1,l:lp,w:wp,r:rp});
@@ -145,9 +157,9 @@ var artist = window.artist = (function(){
 		var set = E("settings");
 		var lis = set.getElementsByTagName("input");
 		for(var i=0,l=lis.length;i<l;i++) {
-			var gauge = new Setting(lis[i]);
+			var gauge = new Setting(lis[i], draw);
 		}
-		artist.draw();
+		draw();
 	};
 
 	//Toggle about section

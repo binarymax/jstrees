@@ -7,7 +7,8 @@
 //
 // Makes a volume-style setting gauge
 //
-var Setting = function(input){
+var Setting = function(input,callback){
+	var self = this;
 	var parent = input.parentNode;
 	var gauge  = Setting.element(parent,"div","gauge");
 	var min = input.getAttribute("data-min");
@@ -18,26 +19,25 @@ var Setting = function(input){
 	max = flt?parseFloat(max):parseInt(max);
 	val = flt?parseFloat(val):parseInt(val);
 	var inc = flt?(max-min)/Setting.lineCount:Math.round((max-min)/Setting.lineCount);
+
 	this.input = input;
 	this.gauge = gauge;
 	this.lines = [];
 	this.min = min;
 	this.max = max;
 	this.val = val;
-	var self = this;
-	console.log('--',min);
+
 	for(var i=0,v=min;i<=Setting.lineCount;i++) {
 		var line = Setting.element(gauge,"div","gaugeline",{'data-value':v});
 		line.innerHTML = "&nbsp;&nbsp;";
-		line.onclick   = function(e) { 
+		line.onclick   = function(e) {
 			var val = this.getAttribute("data-value"); 
 			val = flt?parseFloat(val):parseInt(val); 
 			self.change(val);
-			artist.draw();
+			callback();
 		}
 		this.lines.push({val:v,element:line});
 		v = (flt?Math.round((inc*(i+1))*100)/100:inc*(i+1)) + min;
-		console.log(v);
 	}
 	this.change(val);
 }

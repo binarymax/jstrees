@@ -1,14 +1,13 @@
-Repo for Javascript Tree-themed algorithms
-==========================================
+#jsTrees
 
-Tree Generator Example
-----------------------
+Javascript Tree-themed algorithms
+
+##Tree Generator Example
 
 Tree generator uses the tree API and accompanying settings.js to let the user generate simple trees on an html canvas.
 A live example is here: http://www.binarymax.com/tree.html
 
-tree.js API
------------
+##tree.js API
 
 ### makeNode : Creates a root node.
 
@@ -19,7 +18,8 @@ All nodes (including root) have the following prototype functions:
 
 ### arrayToTree : Converts a flat array to a tree data structure
 
-Sample input:
+###Sample input:
+```
 	var ary = [
 		{"Level":1,"Name":"a"},
 		{"Level":2,"Name":"b"},
@@ -47,8 +47,10 @@ Sample input:
 		str+=obj.Name;
 	});
 	console.log(str);
+```
 
-Sample output:
+###Sample output:
+```
     |a
     |    |b
     |    |c
@@ -63,3 +65,4 @@ Sample output:
     |    |    |l
     |m
     |    |n
+```

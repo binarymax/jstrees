@@ -28,11 +28,6 @@ if ('development' == app.get('env')) {
   app.use(errorHandler());
 }
 
-app.get('/', function(req,res) {
-  console.log('TREEEEES!')
-  res.sendfile("./public/treeworker.html");
-});
-
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
